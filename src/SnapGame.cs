@@ -28,11 +28,16 @@ namespace CardGames
 			}
 			if (myGame.IsStarted) {
 				if (SwinGame.KeyTyped(KeyCode.vk_LSHIFT) &&
-				    SwinGame.KeyTyped(KeyCode.vk_RSHIFT)) {
-					//Add sound effects here
-				} else if (SwinGame.KeyTyped (KeyCode.vk_LSHIFT)) {
+				    SwinGame.KeyTyped(KeyCode.vk_RSHIFT))
+				{
+					SwinGame.PlaySoundEffect ("Slap");
+				}
+				else if (SwinGame.KeyTyped (KeyCode.vk_LSHIFT))
+				{
 					myGame.PlayerHit (0);
-				} else if (SwinGame.KeyTyped (KeyCode.vk_RSHIFT)) {
+				}
+				else if (SwinGame.KeyTyped (KeyCode.vk_RSHIFT))
+				{
 					myGame.PlayerHit (1);
 				}
 			}
@@ -42,30 +47,28 @@ namespace CardGames
 		/// <summary>
 		/// Draws the game to the Window.
 		/// </summary>
-		/// <param name="myGame">The details of the game -- mostly top card and scores.</param>
+		// <param name="myGame">The details of the game -- mostly top card and scores.</param>
 		private static void DrawGame(Snap myGame)
 		{
+			SwinGame.LoadFontNamed ("Font", "Chunkfive.otf", 24);
 			SwinGame.ClearScreen(Color.White);
 			SwinGame.DrawBitmap("cardsBoard.png", 0, 0);
 			// Draw the top card
 			Card top = myGame.TopCard;
 			if (top != null)
 			{
-				SwinGame.DrawText ("Top Card is " + top.ToString (), Color.RoyalBlue, 0, 20);
-				SwinGame.DrawText ("Player 1 score: " + myGame.Score(0), Color.RoyalBlue, 0, 30);
-				SwinGame.DrawText ("Player 2 score: " + myGame.Score(1), Color.RoyalBlue, 0, 40);
-				SwinGame.DrawCell (SwinGame.BitmapNamed ("Cards"), top.CardIndex, 350, 50);
+				SwinGame.DrawText ("Top Card is " + top.ToString (), Color.White, "Font", 330, 120);
+				SwinGame.DrawText ("Player 1: " + myGame.Score (0), Color.White, "Font", 130, 30);
+				SwinGame.DrawText ("Player 2: " + myGame.Score(1), Color.White, "Font", 600, 30);
 				SwinGame.DrawCell (SwinGame.BitmapNamed ("Cards"), top.CardIndex, 521, 153);
 			}
 			else
 			{
-				SwinGame.DrawText ("No card played yet...", Color.RoyalBlue, 0, 20);
+				SwinGame.DrawText ("No card played yet...", Color.White, "Font", 0, 120);
 			}
-
-			SwinGame.DrawCell (SwinGame.BitmapNamed ("Cards"), 52, 155, 153);
+				
 			 //Draw the back of the cards... to represent the deck
-			SwinGame.DrawCell (SwinGame.BitmapNamed ("Cards"), 52, 160, 50);
-
+			SwinGame.DrawCell (SwinGame.BitmapNamed ("Cards"), 52, 155, 153);
 			//Draw onto the screen
 			SwinGame.RefreshScreen(60);
 		}

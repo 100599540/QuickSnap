@@ -139,19 +139,20 @@ namespace CardGames.GameLogic
 		public void PlayerHit (int player)
 		{
 			//TODO: consider deducting score for miss hits???
-			if (player >= 0 && player < _score.Length && // its a valid player
-			    IsStarted && // and the game is started
-			    _topCards [0] != null && _topCards [0].Rank == _topCards [1].Rank) { // and its a match
-				_score [player]++;
-				//TODO: consider playing a sound here...
-			}
-			else if (player >= 0 && player < _score.Length) {
+			if (player >= 0 && player < _score.Length && // …
+			    IsStarted &&
+			    _topCards [0] != null &&
+			    _topCards [0].Rank == _topCards [1].Rank)
+			{
+				_score[player]++;
+			} 
+			else if ( player >= 0 && player < _score.Length)
+			{
 				_score[player]--;
 			}
-
 			// stop the game...
 			_started = false;
-			_gameTimer.Stop ();
+			_gameTimer.Stop();
 		}
 	
 		#region Snap Game Unit Tests
